@@ -35,10 +35,20 @@ app.post('/trip', (req, res) => {
         console.log(result);
         res.status(200).json({ ok: true });
     });
-
 });
 
-app.get('/trips', (req, res) => { /* */ });
+app.get('/trips', (req, res) => { 
+
+    trips.find().toArray( (err, items) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ err:err });
+            return;
+        }
+        res.status(200).json({ trips:items });
+    });
+
+});
 
 app.post('/expense', (req, res) => { /* */ });
 
